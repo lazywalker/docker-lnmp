@@ -1,0 +1,11 @@
+FROM php:7-fpm-alpine
+
+ARG APT=
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+    if [ "${APT}" != "" ] ; then \
+    sed -i "s/dl-cdn.alpinelinux.org/${APT}/g" /etc/apk/repositories \
+    ; fi
+
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+
+RUN install-php-extensions gd redis zip pdo_mysql bcmath
