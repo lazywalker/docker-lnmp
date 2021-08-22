@@ -11,7 +11,7 @@ services:
         networks:
             - lnmp-network
     php:
-        image: lazywalker/php:7-fpm-alpine
+        image: php:7-fpm-alpine
         volumes:
             - ./nginx/www:/www
         networks:
@@ -23,7 +23,7 @@ services:
         volumes:
             - ./mysql/data:/var/lib/mysql
         environment:
-            - MYSQL_ROOT_PASSWORD=123654
+            - MYSQL_ROOT_PASSWORD=passw0rd
         networks:
             - lnmp-network
     redis:
